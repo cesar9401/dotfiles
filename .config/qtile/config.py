@@ -16,8 +16,7 @@
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
@@ -40,7 +39,7 @@ import os
 mod = "mod4"
 mod1 = "mod1"
 # terminal = guess_terminal()
-terminal = "konsole"
+terminal = "kitty"
 
 theme = load_theme()
 
@@ -96,7 +95,7 @@ def getBar():
 			widget.KeyboardLayout(background=theme["color4"], configured_keyboards=["latam", "us", "us -variant intl"], update_interval=1),
 			powerline("color3", "color4"),
 			icon(fg="dark", bg="color3", text="墳"),
-			widget.Volume(**base(bg="color3")),
+			widget.PulseVolume(**base(bg="color3"), scroll_delay=1),
 			powerline("color2", "color3"),
 			widget.Systray(**base(bg="color2")),
 			powerline("color1", "color2"),
@@ -108,7 +107,7 @@ def getBar():
         ],
         28,
         # background=colors[0],
-        opacity=0.90,
+        opacity=1,
         margin=1
     )
 # --------------------- BAR
@@ -171,14 +170,14 @@ keys = [
         desc="Spawn a command using a prompt widget"),
 
     # Switch keyboard layout
-    Key(["control", "shift"], "u", lazy.spawn("setxkbmap us"), desc="keyboard layout to english"),
-    Key(["control", "shift"], "i", lazy.spawn("setxkbmap -layout us -variant intl"), desc="keybaord layout to english international"),
-    Key(["control", "shift"], "l", lazy.spawn("setxkbmap latam"), desc="keybaord layout to latam"),
+    Key(["shift", "control"], "u", lazy.spawn("setxkbmap us"), desc="keyboard layout to english"),
+    Key(["shift", "control"], "i", lazy.spawn("setxkbmap -layout us -variant intl"), desc="keybaord layout to english international"),
+    Key(["shift", "control"], "l", lazy.spawn("setxkbmap latam"), desc="keybaord layout to latam"),
 
     # Volume
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 5%-")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 5%+")),
 
     # Music Player
     Key([], "XF86AudioPlay", lazy.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")),
@@ -204,7 +203,7 @@ keys = [
     # Key([mod, "shift"], "m", lazy.spawn("rofi -show")),
 
     # Browser - google-chrome
-    Key([mod], "b", lazy.spawn("google-chrome-stable")),
+    Key([mod], "b", lazy.spawn("brave")),
 
     # File Explorer
     Key([mod], "f", lazy.spawn("pcmanfm")),
@@ -375,12 +374,11 @@ autostart = [
     "xrandr --output eDP1 --mode 1366x768 --pos 277x1080 --rotate normal --output DP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
     # samsung right, laptop left
     # "xrandr --output eDP1 --primary --mode 1366x768 --pos 0x156 --rotate normal --output DP1 --mode 1920x1080 --pos 1366x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
-    # "setxkbmap -layout us",
     "setxkbmap latam",
-    "feh --bg-fill /home/cesar31/Pictures/wallhaven-4v73q5.jpg",
+    "feh --bg-fill ~/Pictures/wallhaven/wallhaven-lmle8q.png",
     "picom &",
     "nm-applet &",
-    "blueman-applet &",
+    # "blueman-applet &",
     "touchpad-indicator &",
 	"screencloud &",
     # "udiskie -t &",
