@@ -1,0 +1,10 @@
+# move me to /etc/systemd/system
+
+[Unit]
+Description=Disable touchpad
+
+[Service]
+ExecStart=modprobe -r psmouse
+
+[Install]
+WantedBy=multi-user.target

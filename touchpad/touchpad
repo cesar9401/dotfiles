@@ -1,0 +1,30 @@
+#!/bin/bash
+# move me to /usr/bin
+
+if [ $# != 1 ]
+then
+    echo "Se esperaba un argumento"
+    exit 1
+fi
+
+if [ $1 != "on" -a $1 != "off" ]
+then
+    echo "Se esperaba on/off"
+    exit 1
+fi
+
+action=$1
+
+if [ $action == "on" ]
+then
+    echo "Turning on touchpad!"
+    sudo modprobe psmouse
+    exit $?
+fi
+
+if [ $action == "off" ]
+then
+    echo "Turning off touchpad"
+    sudo modprobe -r psmouse
+    exit $?
+fi
