@@ -92,7 +92,7 @@ def getBar():
             widget.TaskList(visible_on=["treetab"], max_title_width=130, border=theme["active"], **base(fg="light")),
 			powerline("color4", "dark"),
 			icon(fg="dark", bg="color4", text=""),
-			widget.KeyboardLayout(background=theme["color4"], configured_keyboards=["latam", "us", "us -variant intl"], update_interval=1),
+			widget.KeyboardLayout(background=theme["color4"], configured_keyboards=["us -variant altgr-intl", "us", "latam"], update_interval=1),
 			powerline("color3", "color4"),
 			icon(fg="dark", bg="color3", text="墳"),
 			widget.PulseVolume(**base(bg="color3"), scroll_delay=1),
@@ -171,7 +171,7 @@ keys = [
 
     # Switch keyboard layout
     Key(["shift", "control"], "u", lazy.spawn("setxkbmap us"), desc="keyboard layout to english"),
-    Key(["shift", "control"], "i", lazy.spawn("setxkbmap -layout us -variant intl"), desc="keybaord layout to english international"),
+    Key(["shift", "control"], "i", lazy.spawn("setxkbmap -layout us -variant altgr-intl"), desc="keybaord layout to english international"),
     Key(["shift", "control"], "l", lazy.spawn("setxkbmap latam"), desc="keybaord layout to latam"),
 
     # Volume
@@ -251,8 +251,8 @@ for i, group in enumerate(groups):
 layouts = [
     # layout.Floating(),
     layout.Max(
-        margin=3,
-        border_width=3,
+        margin=1,
+        border_width=1,
         border_focus=theme["active"]
     ),
     layout.Columns(
@@ -371,11 +371,13 @@ autostart = [
     # samsung left, laptop right
     # "xrandr --output eDP1 --primary --mode 1366x768 --pos 1920x156 --rotate normal --output DP1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
     # samsung(primary) up, laptop down
-    "xrandr --output eDP1 --mode 1366x768 --pos 277x1080 --rotate normal --output DP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
-    # samsung right, laptop left
-    # "xrandr --output eDP1 --primary --mode 1366x768 --pos 0x156 --rotate normal --output DP1 --mode 1920x1080 --pos 1366x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
-    "setxkbmap latam",
-    "feh --bg-fill ~/Pictures/wallhaven/wallhaven-lmle8q.png",
+    # "xrandr --output eDP1 --mode 1366x768 --pos 277x1080 --rotate normal --output DP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
+    # samsung(primary) right, laptop left
+    "xrandr --output eDP1 --mode 1366x768 --pos 0x156 --rotate normal --output DP1 --primary --mode 1920x1080 --pos 1366x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off",
+    # "setxkbmap us",
+    "setxkbmap -layout us -variant altgr-intl",
+    # "setxkbmap latam",
+    "feh --bg-fill ~/Pictures/wallhaven/wallhaven-5wl3z8.png",
     "picom &",
     "nm-applet &",
     # "blueman-applet &",

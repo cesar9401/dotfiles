@@ -10,7 +10,7 @@ import random
 
 # set theme
 def load_theme():
-    theme = getTheme()
+    theme = "material-darker.json"
     theme_file = path.join(qtile_path, "themes", theme)
     with open(theme_file) as jsonfile:
         return json.load(jsonfile)
